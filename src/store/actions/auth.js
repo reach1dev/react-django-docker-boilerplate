@@ -55,7 +55,7 @@ export const authLogin = (username, password) => {
         dispatch(checkAuthTimeout(3600));
       })
       .catch(err => {
-        dispatch(authFail(err));
+        dispatch(authFail({ ...err, message: err.response.status === 400 ? 'Invalid username or password' : err.message }));
       });
   };
 };

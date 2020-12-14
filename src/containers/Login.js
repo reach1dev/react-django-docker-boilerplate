@@ -41,8 +41,6 @@ class LoginForm extends React.Component {
         <Box mx="auto" mt={10} minWidth={300} p={3} boxShadow={2} width='fit-content' textAlign='center'>
 
           <FormGroup >
-            {error && <p>{this.props.error.message}</p>}
-
             <form size="large" onSubmit={this.handleSubmit}>
               <Grid container direction='column' spacing={2}>
                 <Grid container item justify='center'>
@@ -88,6 +86,8 @@ class LoginForm extends React.Component {
                   </Button>
                 </Grid>
 
+                <span style={{ color: 'red' }}>{error && <p>{this.props.error.message}</p>}</span>
+
                 <Grid container item justify='center'>
                   <Message>
                     New to us? <NavLink to="/signup">Sign Up</NavLink>
@@ -95,6 +95,7 @@ class LoginForm extends React.Component {
                 </Grid>
               </Grid>
             </form>
+
           </FormGroup>
         </Box>
       </Grid>
