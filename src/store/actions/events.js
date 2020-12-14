@@ -53,19 +53,20 @@ export const getAllEvents = (authToken, lastUpdatedTime = '') => {
         }
       })
       .then(res => {
+        const events = res.data.map((e) => Object.assign({ ...e, speed: Math.abs(e.speed) }));
         if (lastUpdatedTime !== '') {
-          dispatch(getEventsUpdate(res.data));
+          dispatch(getEventsUpdate(events));
           return;
         }
-        const step = Math.floor(res.data.length / 30);
+        const step = Math.floor(events.length / 30);
         let range = step;
         const timer = setInterval(() => {
-          if (range >= res.data.length) {
+          if (range >= events.length) {
             clearInterval(timer);
           }
-          dispatch(getEventsSuccess(res.data.slice(0, Math.min(range, res.data.length))));
+          dispatch(getEventsSuccess(events.slice(0, Math.min(range, events.length))));
           range = range + step;
-          if (range > res.data.length / 2) {
+          if (range > events.length / 2) {
             range = range + step;
           }
         }, 50);
