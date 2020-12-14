@@ -10,6 +10,8 @@ import AppLogo from "../components/AppLogo";
 import { API_URL } from "../constants/AppConfig";
 import { filterEvents } from "../store/utility";
 
+import { authLogin, logout } from "../store/actions/auth";
+
 
 class EventView extends React.Component {
 
@@ -130,6 +132,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    logout: () => dispatch(logout()),
   };
 };
 
