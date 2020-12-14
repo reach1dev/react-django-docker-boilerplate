@@ -8,6 +8,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import moment from 'moment';
 import AppLogo from "../components/AppLogo";
 import { API_URL } from "../constants/AppConfig";
+import { filterEvents } from "../store/utility";
 
 
 class EventView extends React.Component {
@@ -17,17 +18,23 @@ class EventView extends React.Component {
 
     const pathNames = this.props.history.location.pathname.split("/");
     const index = parseInt(pathNames[pathNames.length - 1]);
+    const events = filterEvents(this.props.events, this.props.searchQuery);
     this.state = {
       index: index,
-      event: this.props.events.find((e, i) => e.index === index)
+      event: events[index],
+      events: events
     };
   }
 
   goNext(dir = 1) {
+    const next = this.state.index + dir;
+    if (next < 0 | next >= this.state.events.length) {
+      return;
+    }
     this.setState({
-      index: this.state.index + dir,
-      event: this.props.events.find((e, i) => e.index === this.state.index + dir)
-    })
+      index: next,
+      event: this.state.events[next]
+    });
   }
 
   render() {
@@ -116,7 +123,8 @@ const mapStateToProps = state => {
     loading: state.auth.loading,
     error: state.auth.error,
     token: state.auth.token,
-    events: state.events.events
+    events: state.events.events,
+    searchQuery: state.events.searchQuery
   };
 };
 

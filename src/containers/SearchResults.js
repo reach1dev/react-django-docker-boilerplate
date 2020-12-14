@@ -101,7 +101,7 @@ class SearchResults extends React.Component {
   }
 
   handleRowClick(params) {
-    this.props.history.push('/event/' + params.row.index)
+    this.props.history.push('/event/' + params.row.id)
   }
 
 
