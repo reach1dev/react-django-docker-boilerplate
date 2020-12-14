@@ -9,10 +9,33 @@
   </p>
 </p>
 
-## DB migration
+## Backend environment setup
 
+```json
+virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+## DB setup and migration
+
+Edit database connection in home/settings/dev.py (for production, prod.py).
+```json
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'speedsnap',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': 3306,
+    }
+}
+```
+Migrate database by running following command.
+```json
 python manage.py migrate
-
+```
 
 ## Create user
 
@@ -21,7 +44,6 @@ Change user detail in create_user.py and run following command.
 python manage.py shell < create_user.py
 ```
 
-
 ## Remove user
 
 Change username in delete_user.py and run following command.
@@ -29,13 +51,9 @@ Change username in delete_user.py and run following command.
 python manage.py shell < delete_user.py
 ```
 
-
 ## Backend development workflow
 
 ```json
-virtualenv env
-source env/bin/activate
-pip install -r requirements.txt
 python manage.py runserver
 ```
 
