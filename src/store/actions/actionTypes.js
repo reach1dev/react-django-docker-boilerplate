@@ -1,0 +1,12 @@
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
+
+export const GET_EVENTS_START = "GET_EVENTS_START";
+export const GET_EVENTS_SUCCESS = "GET_EVENTS_SUCCESS";
+export const GET_EVENTS_UPDATE = "GET_EVENTS_UPDATE";
+export const GET_EVENTS_FAIL = "GET_EVENTS_FAIL";
+
+export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
+export const CLEAR_SEARCH_QUERY = "CLEAR_SEARCH_QUERY";
