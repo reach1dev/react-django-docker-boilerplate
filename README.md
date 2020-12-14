@@ -70,7 +70,9 @@ npm run build
 
 8. Run django server
 
+```json
 python manage.py runserver
+```
 
 
 
