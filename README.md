@@ -16,13 +16,15 @@ python manage.py migrate
 
 ## Create user
 
-Change user detail in create_user.py
+Change user detail in create_user.py and run following command.
+```json
 python manage.py shell < create_user.py
 
 
 ## Remove user
 
-Change username in delete_user.py
+Change username in delete_user.py and run following command.
+```json
 python manage.py shell < delete_user.py
 
 
