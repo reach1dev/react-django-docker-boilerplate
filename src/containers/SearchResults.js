@@ -49,7 +49,7 @@ class SearchResults extends React.Component {
     if (window.screen.width < 500) {
       this.columns = [
         { field: 'index', headerName: 'Event', flex: 2, renderCell: this.renderMobileCell.bind(this), sortable: false },
-        { field: 'vehicle_type', headerName: 'Vehicle', width: 100, sortable: false },
+        { field: 'vehicle_type', headerName: 'Vehicle', renderCell: this.renderMobileTypeCell.bind(this), width: 100, sortable: false },
         { field: 'photo_file', headerName: 'Photo', flex: 1, renderCell: this.renderPhoto.bind(this), sortable: false }
       ]
     }
@@ -79,6 +79,18 @@ class SearchResults extends React.Component {
         <>
           <div>Speed: <b>{event.speed}</b>MPH</div>
           <div>{moment.utc(event.evt_time).format('yyyy-M-D h:m A')}</div>
+        </>
+      )
+    }
+  }
+
+  renderMobileTypeCell(param) {
+    const event = this.props.events.find((e, i) => e.index === param.row.index);
+    if (event) {
+      return (
+        <>
+          <div>Type: <b>{event.vehicle_type}</b></div>
+          <div>LP: <b>{event.license_plate}</b></div>
         </>
       )
     }
