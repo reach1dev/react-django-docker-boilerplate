@@ -18,7 +18,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     path('search', TemplateView.as_view(template_name='index.html')),
-    path(r'^event/(?P<id>.*)$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^event/(?P<id>.*)$', TemplateView.as_view(template_name='index.html')),
     path('login', TemplateView.as_view(template_name='index.html')),
     path('logout', TemplateView.as_view(template_name='index.html')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

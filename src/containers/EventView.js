@@ -43,7 +43,7 @@ class EventView extends React.Component {
       <Box>
         <Box display='flex' justifyContent='space-between' py={1} px={2}>
           <Box display='flex' justifyContent='flex-start' alignItems='center'>
-            <NavLink to='' onClick={(e) => { this.props.history.goBack(); e.preventDefault(); }} >
+            <NavLink to='/search' >
               <ArrowBackIos fontSize='small' />
             </NavLink>
             <AppLogo title={'Event'} />
