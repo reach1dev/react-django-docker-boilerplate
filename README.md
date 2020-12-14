@@ -9,6 +9,59 @@
   </p>
 </p>
 
+## Setup and test step by step
+
+1. Clone repository
+
+git clone https://github.com/clement1024/MySpeedCam.git
+
+or if you have a directory already cloned
+
+git pull origin master
+
+2. Install python packages using pip(pip3) if you are first installation.
+
+pip3 install -r requirements.txt
+
+3. Config database connection details in home/settings/dev.py
+
+```json
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'speedsnap',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': 3306,
+    }
+}
+```
+
+
+4. Migrate database if you are first installation.
+
+python3 manage.py migrate
+
+5. Create user if you are first and, so hasn't any user.
+
+Edit or confirm user details in create_user.py and run following command.
+
+python manage.py shell < create_user.py
+
+6. Install node packages for frontend and build frontend
+
+npm i
+npm run build
+
+7. Create media folder in the root of project and move/copy server folder to media folder.
+
+8. Run django server
+
+python manage.py runserver
+
+
+
 ## Backend environment setup
 
 ```json
