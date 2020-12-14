@@ -13,15 +13,21 @@
 
 1. Clone repository
 
+```json
 git clone https://github.com/clement1024/MySpeedCam.git
+```
 
 or if you have a directory already cloned
 
+```json
 git pull origin master
+```
 
 2. Install python packages using pip(pip3) if you are first installation.
 
+```json
 pip3 install -r requirements.txt
+```
 
 3. Config database connection details in home/settings/dev.py
 
@@ -41,18 +47,24 @@ DATABASES = {
 
 4. Migrate database if you are first installation.
 
+```json
 python3 manage.py migrate
+```
 
 5. Create user if you are first and, so hasn't any user.
 
 Edit or confirm user details in create_user.py and run following command.
 
+```json
 python manage.py shell < create_user.py
+```
 
 6. Install node packages for frontend and build frontend
 
+```json
 npm i
 npm run build
+```
 
 7. Create media folder in the root of project and move/copy server folder to media folder.
 
