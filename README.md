@@ -9,6 +9,23 @@
   </p>
 </p>
 
+## DB migration
+
+python manage.py migrate
+
+
+## Create user
+
+Change user detail in create_user.py
+python manage.py shell < create_user.py
+
+
+## Remove user
+
+Change username in delete_user.py
+python manage.py shell < delete_user.py
+
+
 ## Backend development workflow
 
 ```json
