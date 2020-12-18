@@ -58,7 +58,7 @@ export const getAllEvents = (authToken, lastUpdatedTime = '') => {
           dispatch(getEventsUpdate(events));
           return;
         }
-        const step = Math.min(100, Math.floor(events.length / 30));
+        const step = Math.max(100, Math.floor(events.length / 30));
         let range = step;
         const timer = setInterval(() => {
           if (range >= events.length) {
