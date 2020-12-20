@@ -13,7 +13,7 @@ import { authLogin, logout } from "../store/actions/auth";
 import AppLogo from "../components/AppLogo";
 import { getAllEvents, setSearchQuery } from "../store/actions/events";
 import SearchBar from "../components/SearchBar";
-import { checkEvent, filterEvents } from "../store/utility";
+import { checkEvent, filterEvents, getAllVehicleTypes } from "../store/utility";
 import { API_URL } from "../constants/AppConfig";
 
 function CustomLoadingOverlay() {
@@ -53,7 +53,6 @@ class SearchResults extends React.Component {
         { field: 'photo_file', headerName: 'Photo', flex: 1, renderCell: this.renderPhoto.bind(this), sortable: false }
       ]
     }
-    this.vehicleTypes = this.props.events.reduce((vts, event) => vts.includes(event.vehicle_type) ? vts : [...vts, event.vehicle_type], [])
   }
 
   componentDidMount() {
@@ -107,7 +106,8 @@ class SearchResults extends React.Component {
 
   render() {
     const { error, loading, token } = this.props;
-    let events = filterEvents(this.props.events, this.props.searchQuery);
+    const events = filterEvents(this.props.events, this.props.searchQuery);
+    const vehicleTypes = getAllVehicleTypes(this.props.events);
 
     if (!token) {
       return <Redirect to="/login" />;
@@ -127,7 +127,7 @@ class SearchResults extends React.Component {
         <Box borderBottom={1} mt={0} mb={{ xs: 1, lg: 4 }} />
 
         <Box px={2}>
-          <SearchBar onSearch={this.handleSearch} searchQuery={this.props.searchQuery} vehicleTypes={this.vehicleTypes} hasSearchButton={false} hasVehicleMenu={true} />
+          <SearchBar onSearch={this.handleSearch} searchQuery={this.props.searchQuery} vehicleTypes={vehicleTypes} hasSearchButton={false} hasVehicleMenu={true} />
           <div style={{ height: window.screen.height - 300, width: '100%', marginTop: 20 }}>
             <DataGrid
               columns={this.columns}

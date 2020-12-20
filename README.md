@@ -68,71 +68,15 @@ npm run build
 
 7. Create media folder in the root of project and move/copy server folder to media folder.
 
-8. Run django server
+8. Run django server for local test.
 
 ```json
 python manage.py runserver
 ```
 
-
-
-## Backend environment setup
-
-```json
-virtualenv env
-source env/bin/activate
-pip install -r requirements.txt
-```
-
-## DB setup and migration
-
-Edit database connection in home/settings/dev.py (for production, prod.py).
-```json
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'speedsnap',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': 3306,
-    }
-}
-```
-Migrate database by running following command.
-```json
-python manage.py migrate
-```
-
-## Create user
-
-Change user detail in create_user.py and run following command.
-```json
-python manage.py shell < create_user.py
-```
-
-## Remove user
-
-Change username in delete_user.py and run following command.
-```json
-python manage.py shell < delete_user.py
-```
-
-## Backend development workflow
+9. Run django server for private net test.
+Add your private net ip to the ALLOWED_HOSTS and run following command.
 
 ```json
-python manage.py runserver
-```
-
-## Frontend development workflow
-
-```json
-npm i
-npm start
-```
-
-## For deploying
-
-```json
-npm run build
+python manage.py runserver 0.0.0.0:8000
 ```

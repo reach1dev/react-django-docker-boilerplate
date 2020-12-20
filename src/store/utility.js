@@ -85,3 +85,10 @@ export const filterEvents = (argEvents, searchQuery) => {
   events.sort((a, b) => searchQuery.sortMode.toLowerCase() === 'speed' ? (b.speed - a.speed) : moment.utc(b.evt_time).toDate().getTime() - moment.utc(a.evt_time).toDate().getTime());
   return events.map((e, id) => { return { ...e, id } });
 }
+
+export const getAllVehicleTypes = (events) => {
+  if (events) {
+    return events.reduce((vts, event) => vts.includes(event.vehicle_type) ? vts : [...vts, event.vehicle_type], []);
+  }
+  return [];
+}

@@ -8,7 +8,7 @@ import AppLogo from "../components/AppLogo";
 import StatsCard from "../components/StatsCard";
 import SearchBar from "../components/SearchBar";
 import { clearSearchQuery, getAllEvents, setSearchQuery } from "../store/actions/events";
-import { eventsStatistics } from "../store/utility";
+import { eventsStatistics, getAllVehicleTypes } from "../store/utility";
 
 
 class Dashboard extends React.Component {
@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
   render() {
     const { error, loading, token } = this.props;
     const stats = eventsStatistics(this.props.events);
-    const vehicleTypes = this.props.events.reduce((vts, event) => vts.includes(event.vehicle_type) ? vts : [...vts, event.vehicle_type], []);
+    const vehicleTypes = getAllVehicleTypes(this.props.events);
 
     if (!token) {
       return <Redirect to="/login" />;
