@@ -1,0 +1,33 @@
+version: '2'
+services:
+    django:
+        extends:
+            file: common.yml
+            service: django
+        ports:
+            - "8000:8000"
+        volumes:
+            - static:/srv/django/static
+            - ./media:/srv/django/template/media
+            - build_folder:/srv/django/template
+
+    nginx:
+        image: nginx:latest
+        container_name: ng
+        ports:
+            - "443:443"
+            - "80:80"
+        volumes:
+            - ./nginx/config/:/etc/nginx/conf.d
+        depends_on:
+            - django
+
+    react:
+        build: ./react
+        volumes:
+            - build_folder:/srv/react/build
+
+volumes:
+    build_folder: {}
+    static: {}
+    media: {}

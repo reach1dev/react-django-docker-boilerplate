@@ -80,3 +80,7 @@ Add your private net ip to the ALLOWED_HOSTS and run following command.
 ```json
 python manage.py runserver 0.0.0.0:8000
 ```
+
+## Possible issues in building.
+Refer to this article.
+https://stackoverflow.com/questions/44761246/temporary-failure-in-name-resolution-errno-3-with-docker
