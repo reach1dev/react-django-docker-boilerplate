@@ -23,11 +23,11 @@ or if you have a directory already cloned
 git pull origin master
 ```
 
-2. Install docker
+2. Install docker and docker-compose.
 
-```json
-pip3 install -r requirements.txt
-```
+https://docs.docker.com/engine/install/ubuntu/
+https://docs.docker.com/compose/install/
+
 
 3. Config database connection details in home/settings/dev.py
 
