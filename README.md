@@ -9,7 +9,7 @@
   </p>
 </p>
 
-## Setup and test step by step
+## Deploy using docker
 
 1. Clone repository
 
@@ -23,7 +23,7 @@ or if you have a directory already cloned
 git pull origin master
 ```
 
-2. Install python packages using pip(pip3) if you are first installation.
+2. Install docker
 
 ```json
 pip3 install -r requirements.txt
@@ -38,49 +38,21 @@ DATABASES = {
         'NAME': 'speedsnap',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '<should be your computer IP, not localhost>',
         'PORT': 3306,
     }
 }
 ```
 
 
-4. Migrate database if you are first installation.
+4. Docker compose build.
 
 ```json
-python3 manage.py migrate
+docker-compose -f docker-compose.yml -f docker-compose.test.yml build
 ```
 
-5. Create user if you are first and, so hasn't any user.
-
-Edit or confirm user details in create_user.py and run following command.
+5. Docker compose up.
 
 ```json
-python manage.py shell < create_user.py
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
-
-6. Install node packages for frontend and build frontend
-
-```json
-npm i
-npm run build
-```
-
-7. Create media folder in the root of project and move/copy server folder to media folder.
-
-8. Run django server for local test.
-
-```json
-python manage.py runserver
-```
-
-9. Run django server for private net test.
-Add your private net ip to the ALLOWED_HOSTS and run following command.
-
-```json
-python manage.py runserver 0.0.0.0:8000
-```
-
-## Possible issues in building.
-Refer to this article.
-https://stackoverflow.com/questions/44761246/temporary-failure-in-name-resolution-errno-3-with-docker
