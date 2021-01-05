@@ -12,7 +12,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'speedsnap',
         'USER': 'speedsnap',
-        'PASSWORD': '',
+        'PASSWORD': 'speedsnap',
         'HOST': '192.168.108.73',
         'PORT': 3306,
     }

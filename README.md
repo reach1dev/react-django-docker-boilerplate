@@ -41,12 +41,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'speedsnap',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'speedsnap',
+        'PASSWORD': 'speedsnap',
         'HOST': '<should be your computer IP, not localhost>',
         'PORT': 3306,
     }
 }
+```
+
+** Give % access to this user with password.
+```json
+mysql -u root -p
+
+GRANT SELECT ON speedsnap.* TO 'speedsnap'@'%' IDENTIFIED BY 'speedsnap';
 ```
 
 4. Config ports forwarding in docker-compose.yml.
