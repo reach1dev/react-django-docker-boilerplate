@@ -24,7 +24,8 @@ class EventView extends React.Component {
     this.state = {
       index: index,
       event: events[index],
-      events: events
+      events: events,
+      showCropped: true
     };
   }
 
@@ -48,6 +49,9 @@ class EventView extends React.Component {
 
     const textDisplay = 'inline';
 
+    const cropImageUrl = API_URL + '/media' +
+      (this.state.showCropped ? this.state.event.photo_file.replace(".jpg", ".crop.jpg") : this.state.event.photo_file);
+
     return (
       <Box>
         <Box display='flex' justifyContent='space-between' py={1} px={2}>
@@ -64,11 +68,18 @@ class EventView extends React.Component {
 
         { this.state.event && (
           <Box p={2} textAlign='center'>
-            <img src={API_URL + '/media' + this.state.event.photo_file} width='100%' style={{ maxWidth: 800 }} />
+            <img src={cropImageUrl} width={this.state.showCropped ? null : '100%'} style={{ maxWidth: this.state.showCropped ? 'min(100%, 800px)' : 800 }} />
 
-            <Box mb={4} />
+            <Box mb={1} />
+            <Button
+              color='primary' variant='contained'
+              onClick={() => this.setState({ showCropped: !this.state.showCropped })}
+            >
+              Show {this.state.showCropped ? 'full image' : 'cropped image'}
+            </Button>
+            <Box mb={2} />
 
-            <Grid container justify='center' alignContent='center' alignItems='center' spacing={4}>
+            <Grid container justify='center' alignContent='center' alignItems='center' spacing={2}>
               <Grid item xs={12} lg={3} xl={2}>
                 <Typography variant='h6' component='h6' display={textDisplay} > Speed: </Typography>
                 <Typography variant='h5' component='h5' display={textDisplay} > {this.state.event.speed}MPH </Typography>

@@ -9,7 +9,7 @@ services:
         volumes:
             - static:/srv/django/static
             - ./media:/srv/django/template/media
-            - build_folder:/srv/django/template
+            - react_build:/srv/django/template
 
     nginx:
         image: nginx:latest
@@ -25,9 +25,9 @@ services:
     react:
         build: ./react
         volumes:
-            - build_folder:/srv/react/build
+            - react_build:/srv/react/build
 
 volumes:
-    build_folder: {}
+    react_build: {}
     static: {}
     media: {}

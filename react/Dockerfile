@@ -11,7 +11,7 @@ COPY src /srv/react/src
 COPY public /srv/react/public
 
 USER root
-RUN chown -R node:node .
-USER node
+# RUN chown -R node:node .
+# USER node
 
 RUN npm run build
