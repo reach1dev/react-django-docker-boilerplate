@@ -50,7 +50,7 @@ class EventView extends React.Component {
     const textDisplay = 'inline';
 
     const cropImageUrl = API_URL + '/media' +
-      (this.state.showCropped ? this.state.event.photo_file.replace(".jpg", ".crop.jpg") : this.state.event.photo_file);
+      (this.state.showCropped ? this.state.event.crop_file : this.state.event.photo_file);
 
     return (
       <Box>

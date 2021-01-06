@@ -53,7 +53,7 @@ DATABASES = {
 ```json
 mysql -u root -p
 
-GRANT SELECT ON speedsnap.* TO 'speedsnap'@'%' IDENTIFIED BY 'speedsnap';
+GRANT ALL ON speedsnap.* TO 'speedsnap'@'%' IDENTIFIED BY 'speedsnap';
 ```
 
 4. Config ports forwarding in docker-compose.yml.
@@ -73,21 +73,19 @@ services:
             - "80:80" # you can change the second forwarding port, e.g. "80:8000".
 ```
 
-5. You should add host of docker container to the mysql user.
 
-```json
-service mysql restart
-```
-
-
-6. Docker compose build.
+5. Docker compose build and start.
 
 ```json
 docker-compose -f docker-compose.yml -f docker-compose.test.yml build
+
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
 
-7. Docker compose start services.
+If you are updating this source code and rebuild, use following command to clean docker container cache.
 
 ```json
+docker-compose down --rmi all -v --remove-orphans
+
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```

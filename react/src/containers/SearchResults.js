@@ -43,14 +43,14 @@ class SearchResults extends React.Component {
         }
       },
       { field: 'vehicle_type', headerName: 'Vehicle type', flex: 1, sortable: false },
-      { field: 'photo_file', headerName: 'Photo', flex: 1, sortable: false, renderCell: this.renderPhoto.bind(this) },
+      { field: 'thumb_file', headerName: 'Photo', flex: 1, sortable: false, renderCell: this.renderPhoto.bind(this) },
       { field: 'license_plate', headerName: 'License plate', flex: 1, sortable: false },
     ];
     if (window.screen.width < 500) {
       this.columns = [
         { field: 'index', headerName: 'Event', flex: 2, renderCell: this.renderMobileCell.bind(this), sortable: false },
         { field: 'vehicle_type', headerName: 'Vehicle', renderCell: this.renderMobileTypeCell.bind(this), width: 100, sortable: false },
-        { field: 'photo_file', headerName: 'Photo', flex: 1, renderCell: this.renderPhoto.bind(this), sortable: false }
+        { field: 'thumb_file', headerName: 'Photo', flex: 1, renderCell: this.renderPhoto.bind(this), sortable: false }
       ]
     }
   }
@@ -66,7 +66,7 @@ class SearchResults extends React.Component {
   }
 
   renderPhoto(param) {
-    const photoUrl = API_URL + '/media' + param.value.replace(".jpg", ".thumb.jpg");
+    const photoUrl = API_URL + '/media' + param.value; //.replace(".jpg", ".thumb.jpg");
     return (
       <img src={photoUrl} width={100} height={100} />
     )
