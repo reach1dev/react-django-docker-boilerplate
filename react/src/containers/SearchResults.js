@@ -74,7 +74,7 @@ class SearchResults extends React.Component {
   renderPhoto(param) {
     const photoUrl = API_URL + '/media' + param.value; //.replace(".jpg", ".thumb.jpg");
     return (
-      <img src={photoUrl} width={this.rowHeight} height={this.rowHeight} style={{ margin: 2, objectFit: 'contain', objectPosition: 'center' }} />
+      <div width={this.rowHeight} height={this.rowHeight} style={{ backgroundImage: 'url(' + photoUrl + ')', margin: 2, width: this.rowHeight, height: this.rowHeight, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} />
     )
   }
 
@@ -83,6 +83,7 @@ class SearchResults extends React.Component {
     if (event) {
       return (
         <>
+          <div>Speed: <b>{event.speed}</b>MPH</div>
           <div>Speed: <b>{event.speed}</b>MPH</div>
           <div>{moment.utc(event.evt_time).format('yyyy-M-D h:m A')}</div>
           <div>Type: <b>{event.vehicle_type}</b></div>
