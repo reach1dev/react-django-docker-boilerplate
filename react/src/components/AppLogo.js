@@ -2,12 +2,11 @@ import React from "react";
 
 import { Box, Typography } from "@material-ui/core";
 
-export default function ({ title = '' }) {
+export default function ({ size = 'small' }) {
 
   return (
-    <span>
-      { title === '' && <Typography component='h4' variant='h4' display='inline'> mySpeedCam </Typography>}
-      { title !== '' && <Typography component='h6' variant='h6' display='inline'> {title} </Typography>}
+    <span style={{ height: 'fit-content', marginTop: 'auto', marginBottom: 'auto' }}>
+      <img src="/logo.png" width={size === 'large' ? '250px' : '100px'} />
     </span>
   )
 }

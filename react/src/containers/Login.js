@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
     return (
       <Grid container>
         <Grid container item justify='center'>
-          <Box mt={4}><AppLogo /></Box>
+          <Box mt={10}><AppLogo size='large' /></Box>
         </Grid>
         <Box mx="auto" mt={10} minWidth={300} p={3} boxShadow={2} width='fit-content' textAlign='center'>
 
@@ -79,7 +79,6 @@ class LoginForm extends React.Component {
                     variant="contained"
                     fullWidth={true}
                     onClick={this.handleSubmit}
-                    loading={loading}
                     disabled={loading}
                   >
                     Login

@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Button, LinearProgress, Typography } from "@material-ui/core";
 import { ArrowBackIos } from '@material-ui/icons';
 import { DataGrid, GridOverlay, sortModelSelector } from '@material-ui/data-grid';
+import ReactDataGrid from "react-data-grid";
 
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
@@ -15,6 +16,7 @@ import { getAllEvents, setSearchQuery } from "../store/actions/events";
 import SearchBar from "../components/SearchBar";
 import { checkEvent, filterEvents, getAllVehicleTypes } from "../store/utility";
 import { API_URL } from "../constants/AppConfig";
+import EventView from "./EventView";
 
 function CustomLoadingOverlay() {
   return (
@@ -35,22 +37,26 @@ class SearchResults extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
 
+    this.state = {
+      selectedRow: -1
+    }
+
+    this.rowHeight = 120;
     this.columns = [
-      { field: 'speed', headerName: 'Speed(MPH)', type: 'number', flex: 1, sortable: false, align: 'left', headerAlign: 'left' },
+      { key: 'thumb_file', name: 'Photo', flex: 1, sortable: false, formatter: this.renderPhoto.bind(this) },
+      { key: 'speed', name: 'Speed(MPH)', type: 'number', flex: 1, sortable: false, align: 'left', headerAlign: 'left' },
       {
-        field: 'evt_time', headerName: 'Time', type: 'dateTime', flex: 2, sortable: false, valueFormatter: (params) => {
+        key: 'evt_time', name: 'Time', type: 'dateTime', flex: 2, sortable: false, formatter: (params) => {
           return moment.utc(params.value).format('MMM D, yyyy hh:mm A')
         }
       },
-      { field: 'vehicle_type', headerName: 'Vehicle type', flex: 1, sortable: false },
-      { field: 'thumb_file', headerName: 'Photo', flex: 1, sortable: false, renderCell: this.renderPhoto.bind(this) },
-      { field: 'license_plate', headerName: 'License plate', flex: 1, sortable: false },
+      { key: 'vehicle_type', name: 'Vehicle type', flex: 1, sortable: false },
+      { key: 'license_plate', name: 'License plate', flex: 1, sortable: false },
     ];
     if (window.screen.width < 500) {
       this.columns = [
-        { field: 'index', headerName: 'Event', flex: 2, renderCell: this.renderMobileCell.bind(this), sortable: false },
-        { field: 'vehicle_type', headerName: 'Vehicle', renderCell: this.renderMobileTypeCell.bind(this), width: 100, sortable: false },
-        { field: 'thumb_file', headerName: 'Photo', flex: 1, renderCell: this.renderPhoto.bind(this), sortable: false }
+        { key: 'thumb_file', name: 'Photo', flex: 1, formatter: this.renderPhoto.bind(this), sortable: false },
+        { key: 'index', name: 'Event', flex: 2, formatter: this.renderMobileCell.bind(this), sortable: false }
       ]
     }
   }
@@ -68,7 +74,7 @@ class SearchResults extends React.Component {
   renderPhoto(param) {
     const photoUrl = API_URL + '/media' + param.value; //.replace(".jpg", ".thumb.jpg");
     return (
-      <img src={photoUrl} width={100} height={100} />
+      <img src={photoUrl} width={this.rowHeight} height={this.rowHeight} style={{ margin: 2, objectFit: 'contain', objectPosition: 'center' }} />
     )
   }
 
@@ -79,6 +85,8 @@ class SearchResults extends React.Component {
         <>
           <div>Speed: <b>{event.speed}</b>MPH</div>
           <div>{moment.utc(event.evt_time).format('yyyy-M-D h:m A')}</div>
+          <div>Type: <b>{event.vehicle_type}</b></div>
+          <div>LP: <b>{event.license_plate}</b></div>
         </>
       )
     }
@@ -100,8 +108,12 @@ class SearchResults extends React.Component {
     this.props.setSearchQuery(searchQuery);
   }
 
-  handleRowClick(params) {
-    this.props.history.push('/event/' + params.row.id)
+  handleRowClick(idx) {
+    //const events = filterEvents(this.props.events, this.props.searchQuery);
+    //this.props.history.push('/event/' + events[idx].id);
+    this.setState({
+      selectedRow: idx
+    })
   }
 
 
@@ -114,36 +126,47 @@ class SearchResults extends React.Component {
       return <Redirect to="/login" />;
     }
     return (
-      <Box>
-        <Box display='flex' justifyContent='space-between' py={1} px={2}>
-          <Box display='flex' justifyContent='flex-start' alignItems='center'>
-            <NavLink to={'../'} >
-              <ArrowBackIos fontSize='small' />
-            </NavLink>
-            <AppLogo title={'Search'} />
+      <>
+        <Box display={this.state.selectedRow >= 0 ? 'none' : 'flex'} flexDirection='column'>
+          <Box display='flex' justifyContent='space-between' py={1} px={2}>
+            <Box display='flex' justifyContent='flex-start' alignItems='center'>
+              <NavLink to={'../'} >
+                <ArrowBackIos fontSize='small' />
+              </NavLink>
+              <AppLogo title={'Search'} />
+            </Box>
+            <Button onClick={this.props.logout}>Logout</Button>
           </Box>
-          <Button onClick={this.props.logout}>Logout</Button>
-        </Box>
 
-        <Box borderBottom={1} mt={0} mb={{ xs: 1, lg: 4 }} />
+          <Box borderBottom={1} mt={0} mb={{ xs: 1, lg: 4 }} />
 
-        <Box px={2}>
-          <SearchBar onSearch={this.handleSearch} searchQuery={this.props.searchQuery} vehicleTypes={vehicleTypes} hasSearchButton={false} hasVehicleMenu={true} />
-          <div style={{ height: window.screen.height - 300, width: '100%', marginTop: 20 }}>
-            <DataGrid
-              columns={this.columns}
-              components={{
-                loadingOverlay: CustomLoadingOverlay,
-              }}
-              loading={this.props.loading}
-              rows={events}
-              pageSize={50}
-              className={window.screen.width < 500 ? 'collapsedTable' : ''}
-              onRowClick={this.handleRowClick}
-            />
-          </div>
-        </Box>
-      </Box >
+          <Box px={2}>
+            <SearchBar onSearch={this.handleSearch} searchQuery={this.props.searchQuery} vehicleTypes={vehicleTypes} hasSearchButton={false} hasVehicleMenu={true} />
+            <div style={{ height: window.screen.height - 300, width: '100%', marginTop: 20 }}>
+              <ReactDataGrid
+                columns={this.columns}
+                rowGetter={(i) => events[i]}
+                rowsCount={events.length}
+                headerRowHeight={30}
+                rowHeight={this.rowHeight}
+                minHeight={window.screen.height - 300}
+                scrollToRowIndex={22}
+                components={{
+                  loadingOverlay: CustomLoadingOverlay,
+                }}
+                loading={this.props.loading}
+                rows={events}
+                className={window.screen.width < 500 ? 'collapsedTable' : ''}
+                onRowClick={this.handleRowClick}
+                onRowSelect={this.handleRowClick}
+              />
+            </div>
+          </Box>
+        </Box >
+        { this.state.selectedRow >= 0 &&
+          <EventView selectedRow={this.state.selectedRow} goBack={() => this.setState({ selectedRow: -1 })} />
+        }
+      </>
     );
   }
 }

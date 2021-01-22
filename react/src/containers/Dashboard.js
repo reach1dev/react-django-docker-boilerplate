@@ -33,6 +33,7 @@ class Dashboard extends React.Component {
     const { error, loading, token } = this.props;
     const stats = eventsStatistics(this.props.events);
     const vehicleTypes = getAllVehicleTypes(this.props.events);
+    const screenHeight = window.screen.height;
 
     if (!token) {
       return <Redirect to="/login" />;
@@ -46,7 +47,7 @@ class Dashboard extends React.Component {
 
         <Box borderBottom={1} mt={0} mb={{ xs: 1, lg: 4 }} />
 
-        <Box py={1} px={2}>
+        <Box py={1} px={2} style={{ overflowY: 'scroll', height: (screenHeight - 150) + 'px' }} >
           <Box mb={1} ml={2} >
             <Typography variant='h6' component='h6'>Traffic Statistics</Typography>
           </Box>
