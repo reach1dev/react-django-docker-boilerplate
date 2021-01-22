@@ -5,4 +5,4 @@ db.sqlite3
 react/node_modules
 react/build
 react/package-lock.json
-media
+template
