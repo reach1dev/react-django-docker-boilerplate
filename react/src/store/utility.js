@@ -69,7 +69,10 @@ export const checkEvent = (event, searchQuery) => {
       return false;
     }
   }
-  if (vehicleType !== '') {
+  if (vehicleType !== 'all_photo') {
+    if (vehicleType === 'all_vehicle') {
+      return ['car', 'truck', 'bicycle'].indexOf(event.vehicle_type) >= 0
+    }
     if (event.vehicle_type !== vehicleType) {
       return false;
     }

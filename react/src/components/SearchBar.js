@@ -11,7 +11,7 @@ export default function SearchBar({ onSearch, searchQuery = {}, vehicleTypes = [
   const [filterTime, setFilterTime] = useState(searchQuery.filterTime || '');
   const [sortMode, setSortMode] = useState(searchQuery.sortMode || 'Speed');
   const [speedThreshold, setSpeedThreshold] = useState(searchQuery.speedThreshold || 0);
-  const [vehicleType, setVehicleType] = useState(searchQuery.vehicleType || '');
+  const [vehicleType, setVehicleType] = useState(searchQuery.vehicleType || 'all_vehicle');
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [filterMenuVisible, setFilterMenuVisible] = useState(false);
@@ -131,7 +131,7 @@ export default function SearchBar({ onSearch, searchQuery = {}, vehicleTypes = [
         {hasVehicleMenu && <Grid item xs={12} lg={2}>
           <Box boxShadow={3} display='flex' justifyContent='space-between' onClick={handleVTMenuOpen}>
             <Button style={{ width: '100%' }}>
-              {vehicleType === '' ? 'All vehicles' : vehicleType}
+              {vehicleType === 'all_vehicle' ? 'All vehicles' : (vehicleType === 'all_photo' ? 'All photos' : vehicleType)}
               <ArrowDropDown />
             </Button>
           </Box>
@@ -146,12 +146,12 @@ export default function SearchBar({ onSearch, searchQuery = {}, vehicleTypes = [
             TransitionComponent={Fade}
           >
             <MenuItem
-              key=''
-              selected={'' === vehicleType}
-              onClick={() => handleVTMenuItemClicked('')}
+              key='all_vehicle'
+              selected={'all_vehicle' === vehicleType}
+              onClick={() => handleVTMenuItemClicked('all_vehicle')}
             >
               All vehicles
-          </MenuItem>
+            </MenuItem>
             {vehicleTypes.map((option) => (
               <MenuItem
                 key={option}
@@ -161,6 +161,13 @@ export default function SearchBar({ onSearch, searchQuery = {}, vehicleTypes = [
                 {option}
               </MenuItem>
             ))}
+            <MenuItem
+              key='all_photo'
+              selected={'all_photo' === vehicleType}
+              onClick={() => handleVTMenuItemClicked('all_photo')}
+            >
+              All photos
+            </MenuItem>
           </Menu>
         </Grid>}
 

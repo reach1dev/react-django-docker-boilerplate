@@ -41,7 +41,7 @@ class SearchResults extends React.Component {
       selectedRow: -1
     }
 
-    this.rowHeight = 120;
+    this.rowHeight = 121;
     this.columns = [
       { key: 'thumb_file', name: 'Photo', flex: 1, sortable: false, formatter: this.renderPhoto.bind(this) },
       { key: 'speed', name: 'Speed(MPH)', type: 'number', flex: 1, sortable: false, align: 'left', headerAlign: 'left' },
@@ -143,23 +143,29 @@ class SearchResults extends React.Component {
 
           <Box px={2}>
             <SearchBar onSearch={this.handleSearch} searchQuery={this.props.searchQuery} vehicleTypes={vehicleTypes} hasSearchButton={false} hasVehicleMenu={true} />
-            <div style={{ height: window.screen.height - 300, width: '100%', marginTop: 20 }}>
+            <div style={{ height: window.screen.height - 300, width: '100%', marginTop: 20 }} ref={(container) => { this.container = container; }} >
               <ReactDataGrid
+                ref={(ref) => this.dataGrid = ref}
                 columns={this.columns}
                 rowGetter={(i) => events[i]}
                 rowsCount={events.length}
                 headerRowHeight={30}
-                rowHeight={this.rowHeight}
+                rowHeight={this.rowHeight + 10}
                 minHeight={window.screen.height - 300}
-                scrollToRowIndex={22}
                 components={{
                   loadingOverlay: CustomLoadingOverlay,
                 }}
+                onScroll={(e) => {
+                  console.log(this.dataGrid)
+                }}
+                enableCellSelect={false}
+                enableDragAndDrop={false}
                 loading={this.props.loading}
                 rows={events}
                 className={window.screen.width < 500 ? 'collapsedTable' : ''}
+                //onCellSelected={this.handleRowClick}
                 onRowClick={this.handleRowClick}
-                onRowSelect={this.handleRowClick}
+              //onRowSelect={this.handleRowClick}
               />
             </div>
           </Box>

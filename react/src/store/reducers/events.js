@@ -9,7 +9,7 @@ const initialState = {
     filterMode: 'Cumulative',
     filterDate: '',
     filterTime: '',
-    vehicleType: '',
+    vehicleType: 'all_vehicle',
     sortMode: 'Speed',
     speedThreshold: 0
   }
