@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 from rest_framework import routers
 from home.views import EventViewSet
 from django.conf.urls.static import static
@@ -9,6 +10,8 @@ from django.conf import settings
 
 router = routers.DefaultRouter()
 router.register(r'events', EventViewSet, base_name='events')
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+logo_view = RedirectView.as_view(url='/static/logo.png', permanent=True)
 
 urlpatterns = [
     path('api/', include(router.urls)),
@@ -19,6 +22,8 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
     path('search', TemplateView.as_view(template_name='index.html')),
     re_path(r'^event/(?P<id>.*)$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^favicon\.ico$', favicon_view),
+    re_path(r'^logo\.png$', logo_view),
     path('login', TemplateView.as_view(template_name='index.html')),
     path('logout', TemplateView.as_view(template_name='index.html')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
