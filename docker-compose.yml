@@ -7,7 +7,6 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - static:/srv/django/static
             - ./media:/srv/django/template/media
             - react_build:/srv/django/template
 
@@ -29,5 +28,4 @@ services:
 
 volumes:
     react_build: {}
-    static: {}
     media: {}
