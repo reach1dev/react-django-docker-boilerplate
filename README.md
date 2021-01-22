@@ -1,7 +1,7 @@
 <p align="center">
   <p align="center">
     <a href="https://justdjango.com/?utm_source=github&utm_medium=logo" target="_blank">
-      <img src="https://user-images.githubusercontent.com/58422477/102029022-e8df6580-3dbd-11eb-9954-019ff2767884.png" alt="mySpeedCam" height="72">
+      <img src="https://user-images.githubusercontent.com/58422477/105461911-f16d6a80-5c9e-11eb-8b78-042858cf6895.png" alt="mySpeedCam" height="72">
     </a>
   </p>
   <p align="center">
