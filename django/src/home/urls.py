@@ -10,8 +10,8 @@ from django.conf import settings
 
 router = routers.DefaultRouter()
 router.register(r'events', EventViewSet, base_name='events')
-favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
-logo_view = RedirectView.as_view(url='/static/logo.png', permanent=True)
+favicon_view = RedirectView.as_view(url='/media/favicon.ico', permanent=True)
+logo_view = RedirectView.as_view(url='/media/logo.png', permanent=True)
 
 urlpatterns = [
     path('api/', include(router.urls)),
