@@ -19,7 +19,7 @@ class EventView extends React.Component {
     super(props)
 
     //const pathNames = this.props.history.location.pathname.split("/");
-    const index = this.props.selectedRow;// parseInt(pathNames[pathNames.length - 1]);
+    const index = this.props.selectedRow; //parseInt(pathNames[pathNames.length - 1]);
     const events = filterEvents(this.props.events, this.props.searchQuery);
     this.state = {
       index: index,
@@ -56,11 +56,12 @@ class EventView extends React.Component {
     const cropImageUrl = API_URL + '/media' +
       (this.state.showCropped ? this.state.event.crop_file : this.state.event.photo_file);
 
+    //onClick={(e) => { this.props.goBack(); e.preventDefault() }} 
     return (
       <Box display='flex' justifyContent='space-between' flexDirection='column' style={{ height: '100%' }}>
         <Box display='flex' flex={0} justifyContent='space-between' py={1} px={2} borderBottom={1}>
           <Box display='flex' justifyContent='flex-start' alignItems='center'>
-            <NavLink to='./' onClick={(e) => { this.props.goBack(); e.preventDefault() }} >
+            <NavLink to={''} onClick={(e) => { e.preventDefault(); this.props.goBack() }}  >
               <ArrowBackIos fontSize='small' />
             </NavLink>
             <AppLogo title={'Event'} />
