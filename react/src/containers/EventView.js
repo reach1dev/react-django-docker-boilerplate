@@ -10,7 +10,7 @@ import AppLogo from "../components/AppLogo";
 import { API_URL } from "../constants/AppConfig";
 import { filterEvents } from "../store/utility";
 
-import { authLogin, logout } from "../store/actions/auth";
+import { logout } from "../store/actions/auth";
 
 
 class EventView extends React.Component {
@@ -41,7 +41,7 @@ class EventView extends React.Component {
   }
 
   render() {
-    const { error, loading, token } = this.props;
+    const { token } = this.props;
 
     if (!token) {
       return <Redirect to="/login" />;
@@ -71,7 +71,7 @@ class EventView extends React.Component {
 
         { this.state.event && (
           <Box p={2} flex={1} textAlign='center' style={{ maxHeight: '80%', overflowY: 'scroll' }}>
-            <img src={cropImageUrl} width={'100%'} style={{ maxWidth: 'min(75vw, 60vh)' }} />
+            <img src={cropImageUrl} width={'100%'} style={{ maxWidth: 'min(75vw, 60vh)' }} alt='Photo of event' />
 
             <Box mb={1} />
             <Button

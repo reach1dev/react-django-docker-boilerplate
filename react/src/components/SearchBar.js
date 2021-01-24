@@ -23,7 +23,7 @@ export default function SearchBar({ onSearch, searchQuery = {}, vehicleTypes = [
     }
     return () => {
     }
-  }, [filterMode, filterDate, filterTime, sortMode, speedThreshold, vehicleType])
+  }, [filterMode, filterDate, filterTime, sortMode, speedThreshold, vehicleType, hasSearchButton, onSearch])
 
   // useEffect(() => {
   //   setFilterMode(searchQuery.filterMode || 'Cumulative');

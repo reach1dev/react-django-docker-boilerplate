@@ -6,7 +6,7 @@ WORKDIR /srv/react
 RUN chown -R node:node .
 USER node
 
-RUN npm install --quiet
+RUN npm install --quiet --loglevel=error
 COPY src /srv/react/src
 COPY public /srv/react/public
 
@@ -14,4 +14,4 @@ USER root
 # RUN chown -R node:node .
 # USER node
 
-RUN npm run build
+RUN npm run build --loglevel=error

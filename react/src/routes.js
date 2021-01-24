@@ -1,11 +1,10 @@
 import React from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Hoc from "./hoc/hoc";
 
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
 import SearchResults from "./containers/SearchResults";
-import EventView from "./containers/EventView";
 
 const BaseRouter = () => (
   <Hoc>

@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { error, loading, token } = this.props;
+    const { token } = this.props;
     const stats = eventsStatistics(this.props.events);
     const vehicleTypes = getAllVehicleTypes(this.props.events);
     const screenHeight = window.screen.height;

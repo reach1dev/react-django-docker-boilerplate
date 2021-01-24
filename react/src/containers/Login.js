@@ -1,13 +1,11 @@
 import React from "react";
 
-import { Box, Button, Container, FormGroup, Grid, TextField, Typography } from "@material-ui/core";
-import { palette, spacing, typography } from '@material-ui/system';
+import { Box, Button, FormGroup, Grid, TextField, Typography } from "@material-ui/core";
 
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 
 import { authLogin } from "../store/actions/auth";
-import Header from "../components/Header";
 import Message from "../components/Message";
 import AppLogo from "../components/AppLogo";
 
