@@ -9,6 +9,7 @@ services:
         volumes:
             - ./media:/srv/django/template/media
             - react_build:/srv/django/template
+        network_mode: "host"
 
     nginx:
         image: nginx:latest
