@@ -15,3 +15,5 @@ USER root
 # USER node
 
 RUN npm run build --loglevel=error
+
+COPY django_admin_static /srv/react/build/static/admin

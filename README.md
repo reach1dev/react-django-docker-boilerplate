@@ -89,3 +89,12 @@ docker-compose down --rmi all -v --remove-orphans
 
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
+
+
+
+License key: a5ffa952670070ed76249bbf5b15e681T1JERVI6MjA0NzQsRVhQSVJZPTE2NDI5NzcyNDMwMDAsS0VZVkVSU0lPTj0x
+
+Expiry date: Sun Jan 23 2022
+
+Installation instructions: https://material-ui.com/components/data-grid/getting-started/#license-key-installation
+
