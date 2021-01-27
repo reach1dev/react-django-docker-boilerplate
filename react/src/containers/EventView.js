@@ -90,7 +90,7 @@ class EventView extends React.Component {
 
               <Grid item xs={12} sm={6} md={6} lg={3} xl={2}>
                 <Typography variant='h6' component='h6' display={textDisplay} > Time: </Typography>
-                <Typography variant='h6' component='h6' display={textDisplay} > {moment.utc(this.state.event.evt_time).format('MMM D, yyyy h:m A')}</Typography>
+                <Typography variant='h6' component='h6' display={textDisplay} > {moment.utc(this.state.event.evt_time).format('MMM D, yyyy h:mm A')}</Typography>
               </Grid>
 
               <Grid item xs={12} sm={6} md={6} lg={3} xl={2}>

@@ -53,7 +53,7 @@ class SearchResults extends React.Component {
       { field: 'speed', headerName: 'Speed(MPH)', type: 'number', flex: 1, sortable: false, align: 'left', headerAlign: 'left' },
       {
         field: 'evt_time', headerName: 'Time', type: 'dateTime', flex: 2, sortable: false, valueFormatter: (params) => {
-          return moment.utc(params.value).format('MMM D, yyyy hh:mm A')
+          return moment.utc(params.value).format('MMM D, yyyy h:mm A')
         }
       },
       { field: 'vehicle_type', headerName: 'Vehicle type', flex: 1, sortable: false },
@@ -91,7 +91,7 @@ class SearchResults extends React.Component {
       return (
         <>
           <div>Speed: <b>{event.speed}</b>MPH</div>
-          <div>{moment.utc(event.evt_time).format('yyyy-M-D h:m A')}</div>
+          <div>{moment.utc(event.evt_time).format('yyyy-M-D h:mm A')}</div>
           <div>Type: <b>{event.vehicle_type}</b></div>
           <div>LP: <b>{event.license_plate}</b></div>
         </>
