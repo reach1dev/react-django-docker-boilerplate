@@ -1,3 +1,9 @@
+<p align="center">
+  <p align="center">
+    React + Django + Docker Boilerplate
+  </p>
+</p>
+
 ## Build and Deploy using docker
 
 ```json
